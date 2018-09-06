@@ -21,4 +21,12 @@ class PostsRepository implements PostsInterface
 
     	return [$BlogPosts->get(), $BlogPosts->count()];
     }
+
+    public function show($id)
+    {
+    	return BlogPosts::find($id);
+    	$BlogPosts = new BlogPosts();
+
+    	return $BlogPosts->where('id', '=', $id)->get();
+    }
 }

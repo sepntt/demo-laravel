@@ -13,3 +13,4 @@ yarn-error.log
 .env
 .phpunit.result.cache
 /app/Console/Commands/ShiQu.php
+/public/uploads/upload/*

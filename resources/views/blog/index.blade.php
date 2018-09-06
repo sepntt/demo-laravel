@@ -3,17 +3,19 @@
 @section('content')
   <div class="row justify-content-center">
     <div class="col-md-8">
-      @foreach ($list as $key => $value)
-      <div class="card">
-          <!-- <img src="https://bootstrap-themes.github.io/application/assets/img/unsplash_1.jpg" class="img-fluid" alt="Responsive image"> -->
+      <!-- <div class="card-columns"> -->
+        @foreach ($list as $key => $value)
+        <div class="card">
+            <!-- <img src="https://bootstrap-themes.github.io/application/assets/img/unsplash_1.jpg" class="img-fluid" alt="Responsive image"> -->
 
-        <div class="card-body">
-          <h5 class="card-title">{{$value->title}}</h5>
-          <p class="card-text"><?=$value->body;?></p>
-          <p class="card-text text-right"><a href="#" class="card-link"><small class="text-muted">{{$value->created_at}}</small></a></p>
+          <div class="card-body">
+            <h5 class="card-title"><a href="/blog/show/{{$value->id}}" class="text-dark card-link" ><b>{{$value->title}}</b></a></h5>
+            <p class="card-text"><?=str_limit($value->body, 120, '..');?></p>
+            <p class="card-text text-right"><a href="/blog/show/{{$value->id}}" class="card-link"><small class="text-muted">{{$value->created_at}}</small></a></p>
+          </div>
         </div>
-      </div>
-      @endforeach
+        @endforeach
+      <!-- </div> -->
   </div>
   <div class="col-md-4">
       <div class="alert alert-primary" role="alert">

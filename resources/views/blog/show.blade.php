@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-header"><h1><strong>Dashboard</strong></h1></div>
         <img src="https://bootstrap-themes.github.io/application/assets/img/unsplash_1.jpg" class="img-fluid" alt="Responsive image">
         <div class="card-body">
@@ -13,18 +13,16 @@
             <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
           </blockquote>
         </div>
-      </div>
+      </div> -->
       <div class="card">
-        <div class="card-header">Dashboard</div>
+        <div class="card">
+            <!-- <img src="https://bootstrap-themes.github.io/application/assets/img/unsplash_1.jpg" class="img-fluid" alt="Responsive image"> -->
 
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            You are logged in111111111111!
+          <div class="card-body">
+            <h5 class="card-title"><a href="/blog/show/{{$show->id}}" class="text-dark card-link" ><b>{{$show->title}}</b></a></h5>
+            <p class="card-text"><?=$show->body;?></p>
+            <p class="card-text text-right"><a href="/blog/show/{{$show->id}}" class="card-link"><small class="text-muted">{{$show->created_at}}</small></a></p>
+          </div>
         </div>
       </div>
   </div>

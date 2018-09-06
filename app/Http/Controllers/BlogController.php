@@ -58,7 +58,13 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        return view('blog.show');
+        $show = $this->Posts->show($id);
+
+        if(empty($show)) {
+            return redirect('blog');
+        }
+
+        return view('blog.show', ['show' => $show]);
     }
 
     /**

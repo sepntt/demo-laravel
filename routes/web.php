@@ -42,4 +42,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix'=>'blog'], function () {
 	Route::get('/','BlogController@index');
+	Route::get('/show/{id}','BlogController@show');
 });
