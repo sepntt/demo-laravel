@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::redirect('/','/blog');
+
 Auth::routes();
 
 // Registration Routes...//关闭注册
@@ -37,7 +39,8 @@ Route::post('password/reset', function () {
 	return redirect('home');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('/home', '/blog');
 
 
 Route::group(['prefix'=>'blog'], function () {

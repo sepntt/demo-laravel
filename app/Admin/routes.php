@@ -12,7 +12,9 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
-    $router->resource('blog', 'BlogController');
+    $router->resource('blog/blog', 'BlogController');
+    $router->resource('blog/blog_messages_notice', 'BlogMessagesNoticeController');
+
 
     $router->post('blog/upload', 'BlogController@upload');
 
