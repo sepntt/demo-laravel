@@ -16,18 +16,17 @@ class BlogMessagesNotice extends Model
 
     public function messageBelongsTo()
     {
-    	return $this->belongsTo(Messages::class, 'messages_id');
-    	// return $this->hasOne('App\Models\Messages');
+    	return $this->belongsTo(Messages::class);
     }
 
     public function message()
     {
-    	return $this->hasOne(Messages::class, 'id');
+    	return $this->hasOne(Messages::class, 'id', 'messages_id');
     }
 
     public function messages()
     {
-    	return $this->hasMany(Messages::class, 'id');
+    	return $this->hasMany(Messages::class, 'id', 'messages_id');
     }
 
     public function saveInfo($params)

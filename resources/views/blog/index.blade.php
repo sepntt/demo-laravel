@@ -1,4 +1,4 @@
-@extends('blog.default')
+@extends('layouts.default')
 
 @section('content')
   <div class="row justify-content-center">
@@ -18,12 +18,14 @@
       <!-- </div> -->
   </div>
   <div class="col-md-4">
-      <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
+      @if (!empty($notice))
+      <div class="alert alert-{{$notice->color}}" role="alert">
+        {{$notice->messages->message}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      @endif
       <ul class="list-group">
         <li class="list-group-item disabled">Cras justo odio</li>
         <li class="list-group-item">Dapibus ac facilisis in</li>

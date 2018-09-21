@@ -4,18 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Repository\Blog\PostsInterface;
+use App\Repository\Todolist\TodolistInterface;
 
-class BlogController extends Controller
+class TodolistController extends Controller
 {
 
-    public $Posts;
+    public $Todolist;
 
-    public function __construct(PostsInterface $PostsInterface)
+    public function __construct(TodolistInterface $TodolistInterface)
     {
-        $this->Posts = $PostsInterface;//构造函数的注入等于下面make
-        // $PostsInterface = app()->make(PostsInterface::class);
-
+        $this->Todolist = $TodolistInterface;
         # code...
     }
     /**
@@ -25,11 +23,8 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        list($list, $count) = $this->Posts->list($request);
-        // \DB::connection()->enableQueryLog();
-        $notice = $this->Posts->getNotice();
-        // $log = \DB::getQueryLog();
-        return view('blog.index', ['list' => $list, 'count' => $count, 'notice' => $notice]);
+        list($list, $count) = $this->Todolist->list($request);
+        return view('todolist.index', ['list' => $list, 'count' => $count]);
     }
 
     /**
@@ -62,13 +57,6 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        $show = $this->Posts->show($id);
-
-        if(empty($show)) {
-            return redirect('blog');
-        }
-
-        return view('blog.show', ['show' => $show]);
     }
 
     /**

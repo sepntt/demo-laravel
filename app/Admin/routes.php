@@ -17,5 +17,6 @@ Route::group([
 
 
     $router->post('blog/upload', 'BlogController@upload');
+    $router->resource('todolist', 'TodolistController');
 
 });

@@ -47,3 +47,7 @@ Route::group(['prefix'=>'blog'], function () {
 	Route::get('/','BlogController@index');
 	Route::get('/show/{id}','BlogController@show');
 });
+
+Route::group(['prefix'=>'todolist'], function () {
+	Route::get('/','TodolistController@index');
+});
