@@ -22,4 +22,29 @@ class TodolistRepository implements TodolistInterface
     	return [$Todolist->get(), $Todolist->count()];
     }
 
+    public function viewIndex($list)
+    {
+    	$btn = array_column($this->doneArr(), 'btn', 'id');
+    	foreach ($list as $key => $value) {
+    		$list[$key]['btn_done'] = $btn[$value['done']];
+    	}
+    	return $list;
+    }
+
+    public function doneName()
+    {
+    	$name = array_column($this->doneArr(), 'name', 'id');
+    	return $name;
+    }
+
+    public function viewBtn()
+    {
+    	return $this->doneArr();
+    }
+
+    public function doneArr()
+    {
+    	return config('customer.todolist.done');
+    }
+
 }

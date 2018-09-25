@@ -14,7 +14,6 @@ class TodolistController extends Controller
     public function __construct(TodolistInterface $TodolistInterface)
     {
         $this->Todolist = $TodolistInterface;
-        # code...
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +23,10 @@ class TodolistController extends Controller
     public function index(Request $request)
     {
         list($list, $count) = $this->Todolist->list($request);
-        return view('todolist.index', ['list' => $list, 'count' => $count]);
+        $list = $this->Todolist->viewIndex($list);
+        $btn = $this->Todolist->viewBtn();
+        
+        return view('todolist.index', ['list' => $list, 'count' => $count, 'btn' => $btn]);
     }
 
     /**

@@ -11,9 +11,16 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
+use App\Repository\Todolist\TodolistInterface;
+
 class TodolistController extends Controller
 {
     use ModelForm;
+
+    public function __construct(TodolistInterface $TodolistInterface)
+    {
+        $this->Todolist = $TodolistInterface;
+    }
 
     /**
      * Index interface.
@@ -75,7 +82,7 @@ class TodolistController extends Controller
 
             $grid->id('ID')->sortable();
             $grid->todo('TODO')->sortable();
-            $grid->done('状态')->using(config('customer.todolist.done'));
+            $grid->done('状态')->using($this->Todolist->doneName());
 
             $grid->created_at();
             $grid->updated_at();
@@ -95,7 +102,7 @@ class TodolistController extends Controller
             $form->text('todo', 'TODO');
             $form->text('desc', '描述');
 
-            $form->select('done', '状态')->options(config('customer.todolist.done'))->default(1);
+            $form->select('done', '状态')->options($this->Todolist->doneName())->default(1);
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
