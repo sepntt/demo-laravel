@@ -20,7 +20,7 @@
   <div class="col-md-4">
       @if (!empty($notice))
       <div class="alert alert-{{$notice->color}}" role="alert">
-        {{$notice->messages->message}}
+        <?=$notice->messages->message;?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
