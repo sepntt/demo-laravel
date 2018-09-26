@@ -83,6 +83,7 @@ class TodolistController extends Controller
             $grid->id('ID')->sortable();
             $grid->todo('TODO')->sortable();
             $grid->done('状态')->using($this->Todolist->doneName());
+            $grid->version('版本号');
 
             $grid->created_at();
             $grid->updated_at();
