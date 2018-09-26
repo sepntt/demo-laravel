@@ -99,7 +99,13 @@ class TodolistController extends Controller
         return Admin::form(Todolist::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            
+            $form->divide();
             $form->text('todo', 'TODO');
+            $form->html($this->getTodolistCheckHtml(), '选择Todolist');
+            $form->divide();
+
+            $form->currency('version', '版本号')->symbol('V');
             $form->text('desc', '描述');
 
             $form->select('done', '状态')->options($this->Todolist->doneName())->default(1);
@@ -107,5 +113,27 @@ class TodolistController extends Controller
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });
+    }
+
+    public function getTodolistCheckHtml()
+    {
+        $html = '';
+        $todolist = (Todolist::select()->get()->toArray());
+        $html = '';
+        foreach ($todolist as $key => $value) {
+            $html .= '<button type="button" class="btn btn-default dropdown-toggle todolist-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$value['todo'].'</button>';
+        }
+        $script = <<<EOT
+<script>
+window.onload = function(){
+    $('.todolist-btn').on('click', function(){
+        $('#todo').val('')
+        $('#todo').val($(this).text())
+    });
+};
+</script>
+EOT;
+        $html .= $script;
+        return $html;
     }
 }
