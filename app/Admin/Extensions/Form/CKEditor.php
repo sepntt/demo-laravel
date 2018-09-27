@@ -59,7 +59,24 @@ class CKEditor extends Field
     public function ckeditor4($csrf)
     {
         $script = "
-CKEDITOR.replace( 'editor' );
+        console.log(1)
+CKEDITOR.replace( 'editor' , {
+    removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor'
+    ,codeSnippet_languages : {
+        javascript: 'JavaScript',
+        php: 'PHP',
+        bash: 'Bash',
+        python: 'Python',
+        c: 'C',
+        json: 'Json'
+    },
+    width : 820,
+    height : 900,
+    filebrowserUploadUrl  : '/admin/blog/upload?_token={$csrf}'
+    // ,extraAllowedContent : '*{*}'
+    , extraPlugins : 'codesnippetgeshi'
+    , codeSnippetGeshi_url : '/packages/lib/geshi/colorize.php'//单独的geshi php类库
+});
         ";
         return $script;
     }

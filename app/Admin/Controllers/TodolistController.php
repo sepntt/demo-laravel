@@ -107,7 +107,7 @@ class TodolistController extends Controller
             $form->divide();
 
             $form->currency('version', '版本号')->symbol('V');
-            $form->text('desc', '描述');
+            $form->ckeditor('desc', '描述');
 
             $form->select('done', '状态')->options($this->Todolist->doneName())->default(1);
 
