@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Todolist;
+use App\Models\SelfShoppingList;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -11,16 +11,9 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-use App\Repository\Todolist\TodolistInterface;
-
-class TodolistController extends Controller
+class SelfShoppingListController extends Controller
 {
     use ModelForm;
-
-    public function __construct(TodolistInterface $TodolistInterface)
-    {
-        $this->Todolist = $TodolistInterface;
-    }
 
     /**
      * Index interface.
@@ -78,12 +71,15 @@ class TodolistController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(Todolist::class, function (Grid $grid) {
+        return Admin::grid(SelfShoppingList::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->todo('TODO')->sortable();
-            $grid->done('状态')->using($this->Todolist->doneName());
-            $grid->version('版本号');
+            $grid->product_name('产品');
+            $grid->brand_name('品牌');
+            $grid->purchase_channel('购买渠道');
+            $grid->num('数量');
+            $grid->price('价格');
+            $grid->pictures('图片')->image();
 
             $grid->created_at();
             $grid->updated_at();
@@ -97,45 +93,20 @@ class TodolistController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Todolist::class, function (Form $form) {
+        return Admin::form(SelfShoppingList::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            
-            $form->divide();
-            $form->text('todo', 'TODO');
-            $form->html($this->getTodolistCheckHtml(), '选择Todolist');
+            $form->text('product_name', '产品');
+            $form->text('brand_name', '品牌');
             // $form->textkeywords('brand_name','选择品牌')->setData((SelfShoppingList::select()->get()->toArray()),'brand_name');
-            $form->divide();
+            $form->text('purchase_channel', '购买渠道');
+            $form->number('num', '数量');
+            $form->currency('price', '价格')->symbol('￥');
 
-            $form->currency('version', '版本号')->symbol('V');
-            $form->ckeditor('desc', '描述');
-
-            $form->select('done', '状态')->options($this->Todolist->doneName())->default(1);
+            $form->multipleImage('pictures', '图片')->removable();
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });
-    }
-
-    public function getTodolistCheckHtml()
-    {
-        $html = '';
-        $todolist = (Todolist::select()->get()->toArray());
-        $html = '';
-        foreach ($todolist as $key => $value) {
-            $html .= '<button type="button" class="btn btn-default dropdown-toggle todolist-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$value['todo'].'</button>';
-        }
-        $script = <<<EOT
-<script>
-window.onload = function(){
-    $('.todolist-btn').on('click', function(){
-        $('#todo').val('')
-        $('#todo').val($(this).text())
-    });
-};
-</script>
-EOT;
-        $html .= $script;
-        return $html;
     }
 }
