@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('route:list')->dailyAt('02:00');
+        // $schedule->command('route:mysqldump')->dailyAt('10:00');
         // $schedule->command('command:name')->description('name')->everyMinute();//测试
     }
 

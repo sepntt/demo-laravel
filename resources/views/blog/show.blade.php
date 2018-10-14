@@ -1,4 +1,8 @@
-@extends('blog.default')
+@extends('layouts.default')
+
+<link rel="stylesheet" href="{{ asset('packages/highlight/styles/default.css') }}">
+<script src="{{ asset('packages/highlight/highlight.pack.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 @section('content')
 <div class="container-fluid">

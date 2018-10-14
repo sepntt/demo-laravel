@@ -19,9 +19,13 @@
  */
 
 use App\Admin\Extensions\Form\CKEditor;
+use App\Admin\Extensions\Form\ColorSelect;
+use App\Admin\Extensions\Form\TextKeywords;
 
 use Encore\Admin\Form;
 
 Encore\Admin\Form::forget(['map', 'editor']);
 
 Form::extend('ckeditor', CKEditor::class);
+Form::extend('colorSelect', ColorSelect::class);
+Form::extend('textkeywords', TextKeywords::class);

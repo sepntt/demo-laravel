@@ -4,10 +4,6 @@ namespace App\Repository;
 
 use Illuminate\Support\Facades\Storage;
 
-use App\Repository\Blog\PostsInterface;
-use App\Repository\Blog\PostsRepository;
-
-
 class Repository
 {
 
@@ -15,7 +11,8 @@ class Repository
 	public $Storage;
 
     public $singletons = [
-    	'App\Repository\Blog\PostsInterface' => 'App\Repository\Blog\PostsRepository'
+        'App\Repository\Blog\PostsInterface' => 'App\Repository\Blog\PostsRepository',
+    	'App\Repository\Todolist\TodolistInterface' => 'App\Repository\Todolist\TodolistRepository',
     ];
 
 

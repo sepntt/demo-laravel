@@ -1,37 +1,49 @@
-@extends('blog.default')
+@extends('layouts.default')
 
 @section('content')
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <!-- <div class="card-columns"> -->
-        @foreach ($list as $key => $value)
-        <div class="card">
-            <!-- <img src="https://bootstrap-themes.github.io/application/assets/img/unsplash_1.jpg" class="img-fluid" alt="Responsive image"> -->
+      <div class="row">
+        <div class="col-md-12">
+            @foreach ($list as $key => $value)
+            <div class="card rounded shadow">
+                <!-- <img src="https://bootstrap-themes.github.io/application/assets/img/unsplash_1.jpg" class="img-fluid" alt="Responsive image"> -->
 
-          <div class="card-body">
-            <h5 class="card-title"><a href="/blog/show/{{$value->id}}" class="text-dark card-link" ><b>{{$value->title}}</b></a></h5>
-            <p class="card-text"><?=str_limit($value->body, 120, '..');?></p>
-            <p class="card-text text-right"><a href="/blog/show/{{$value->id}}" class="card-link"><small class="text-muted">{{$value->created_at}}</small></a></p>
-          </div>
+              <div class="card-body" style="max-height: 200px;overflow:hidden;">
+                <h5 class="card-title">
+                  <a href="/blog/show/{{$value->id}}" class="text-dark card-link" ><b>{{$value->title}}</b></a>
+                </h5>
+                <p class="card-text"><?=$value->body?></p>
+                <!--<?=explode("\n", $value->body)[0];?>-->
+              </div>
+              <div class="card-body float-sm-right">
+                  <p class="card-text text-right"><a href="/blog/show/{{$value->id}}" class="card-link"><small class="text-muted">{{$value->created_at}}</small></a></p>
+                  
+                </div>
+            </div>
+            <br/>
+            @endforeach
         </div>
-        @endforeach
-      <!-- </div> -->
+      </div>
   </div>
   <div class="col-md-4">
-      <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
+      @if (!empty($notice))
+      <div class="alert alert-{{$notice->color}} shadow" role="alert">
+        <?=$notice->messages->message;?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <ul class="list-group">
+      @endif
+      <ul class="list-group shadow">
         <li class="list-group-item disabled">Cras justo odio</li>
         <li class="list-group-item">Dapibus ac facilisis in</li>
         <li class="list-group-item">Morbi leo risus</li>
         <li class="list-group-item">Porta ac consectetur ac</li>
         <li class="list-group-item">Vestibulum at eros</li>
       </ul>
-      <div class="card">
+      <br/>
+      <div class="card shadow">
         <div class="card-header">Hot</div>
 
         <div class="card-body">

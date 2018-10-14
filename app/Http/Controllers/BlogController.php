@@ -13,7 +13,9 @@ class BlogController extends Controller
 
     public function __construct(PostsInterface $PostsInterface)
     {
-        $this->Posts = $PostsInterface;
+        $this->Posts = $PostsInterface;//构造函数的注入等于下面make
+        // $PostsInterface = app()->make(PostsInterface::class);
+
         # code...
     }
     /**
@@ -23,9 +25,11 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $PostsInterface = app()->make(PostsInterface::class);
-        list($list, $count) = $PostsInterface->list($request);
-        return view('blog.index', ['list' => $list, 'count' => $count]);
+        list($list, $count) = $this->Posts->list($request);
+        // \DB::connection()->enableQueryLog();
+        $notice = $this->Posts->getNotice();
+        // $log = \DB::getQueryLog();
+        return view('blog.index', ['list' => $list, 'count' => $count, 'notice' => $notice]);
     }
 
     /**

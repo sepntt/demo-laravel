@@ -8,7 +8,8 @@ class CKEditor extends Field
 {
     public static $js = [
         // 'https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js',
-        '/packages/ckeditor5-build-classic/ckeditor.js',
+        // '/packages/ckeditor5-build-classic/ckeditor.js',
+        '/packages/ckeditor/ckeditor.js',
         // '/packages/ckeditor/adapters/jquery.js',
     ];
 
@@ -16,9 +17,17 @@ class CKEditor extends Field
 
     public function render()
     {
-        // $this->script = "$('textarea.{$this->getElementClassString()}').ckeditor();";
         $csrf = csrf_token();
-        $this->script = "ClassicEditor
+
+        // $this->script = $this->ckeditor5($csrf);
+        $this->script = $this->ckeditor4($csrf);
+
+        return parent::render();
+    }
+
+    public function ckeditor5($csrf)
+    {
+        $script = "ClassicEditor
         .create( document.querySelector( '#editor' ) ,{
             toolbar : ['heading','undo','bold','blockQuote','imageUpload','link','numberedList','bulletedList'],
             ckfinder : {
@@ -44,7 +53,31 @@ class CKEditor extends Field
             console.error( error );
         } );
         ";
+        return $script;
+    }
 
-        return parent::render();
+    public function ckeditor4($csrf)
+    {
+        $script = "
+        console.log(1)
+CKEDITOR.replace( 'editor' , {
+    removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor'
+    ,codeSnippet_languages : {
+        javascript: 'JavaScript',
+        php: 'PHP',
+        bash: 'Bash',
+        python: 'Python',
+        c: 'C',
+        json: 'Json'
+    },
+    width : 820,
+    height : 900,
+    filebrowserUploadUrl  : '/admin/blog/upload?_token={$csrf}'
+    // ,extraAllowedContent : '*{*}'
+    , extraPlugins : 'codesnippetgeshi'
+    , codeSnippetGeshi_url : '/packages/lib/geshi/colorize.php'//单独的geshi php类库
+});
+        ";
+        return $script;
     }
 }
