@@ -101,7 +101,7 @@ class BlogController extends Controller
     protected function grid()
     {
         return Admin::grid(BlogPosts::class, function (Grid $grid) {
-
+            $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->title('标题')->sortable();
 
