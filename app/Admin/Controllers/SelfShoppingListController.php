@@ -22,12 +22,16 @@ class SelfShoppingListController extends Controller
      */
     public function index()
     {
-        return Admin::content(function (Content $content) {
+        $show = request()->show;
+        return Admin::content(function (Content $content) use ($show) {
 
             $content->header('header');
             $content->description('description');
-
-            $content->body($this->grid());
+            if($show == 1) {
+                $content->body($this->grid());
+            } else {
+                $content->body($this->grid2());
+            }
         });
     }
 
@@ -70,6 +74,28 @@ class SelfShoppingListController extends Controller
      * @return Grid
      */
     protected function grid()
+    {
+        return Admin::grid(SelfShoppingList::class, function (Grid $grid) {
+
+            // $grid->id('ID')->sortable();
+            $grid->product_name('产品');
+            $grid->brand_name('品牌');
+            $grid->purchase_channel('购买渠道');
+            $grid->num('数量');
+            $grid->price('价格');
+            // $grid->pictures('图片')->image();
+
+            // $grid->created_at();
+            // $grid->updated_at();
+        });
+    }
+
+    /**
+     * Make a grid builder.
+     *
+     * @return Grid
+     */
+    protected function grid2()
     {
         return Admin::grid(SelfShoppingList::class, function (Grid $grid) {
 
