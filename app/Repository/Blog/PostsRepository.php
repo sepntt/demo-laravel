@@ -13,14 +13,20 @@ class PostsRepository implements PostsInterface
     public function list($request)
     {
     	$title = $request->get('title', '');
-
     	$BlogPosts = new BlogPosts();
 
+        $where = [];
     	if(!empty($title)) {
-    		$BlogPosts->where('title', 'like', $title);
+            $where[] = ['title', 'like', $title];
     	}
+        $model = $BlogPosts->where($where)->orderBy('updated_at', 'desc');
 
-    	return [$BlogPosts->get(), $BlogPosts->count()];
+        // \Illuminate\Support\Facades\DB::connection()->enableQueryLog();
+        // $sql = \Illuminate\Support\Facades\DB::getQueryLog();
+        // dd($sql);exit;
+        $res = [$model->get(), $model->count()];
+        
+    	return $res;
     }
 
     public function show($id)
