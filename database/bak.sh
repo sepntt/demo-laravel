@@ -4,7 +4,14 @@ if [ ! $1 ]; then
 	exit
 fi 
 path=${1}"la.sql"
-read -p "Is mysqldump > ${path} ? Y/N: " f
+
+
+if [ ! $2 ]; then
+	read -p "Is mysqldump > ${path} ? Y/N: " f
+else
+	f=$2
+fi
+
 if [ ! $f ]; then
 	exit
 fi
