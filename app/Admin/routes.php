@@ -18,6 +18,8 @@ Route::group([
 
     $router->post('blog/upload', 'BlogController@upload');
     $router->resource('todolist', 'TodolistController');
+
+    $router->get('self/shopping/list/create2', 'SelfShoppingListController@create2');
     $router->resource('self/shopping/list', 'SelfShoppingListController');
 
 });

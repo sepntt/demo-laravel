@@ -72,11 +72,24 @@ class SelfShoppingListController extends Controller
     {
         $show = request()->show;
 
+        //品牌list显示
+        $obj = $this;
+        $brand_name = function (Grid $grid) use ($obj) {
+            $grid->column('brand_name', '品牌')->display(function ($brand_name) use ($obj) {
+                $html = [];
+                foreach ($brand_name as $key => $value) {
+                    $html[] = "<span class='badge bg-light-blue'>".$obj->getBrandName($value)."</span>";
+                }
+                return implode('', $html);
+            });
+            return $grid;
+        };
+
         if($show != 1) {
-            $show_func = function (Grid $grid) {
+            $show_func = function (Grid $grid) use ($brand_name) {
 
                 $grid->product_name('产品');
-                $grid->brand_name('品牌');
+                $grid = $brand_name($grid);
                 $grid->purchase_channel('购买渠道');
                 $grid->num('数量');
                 $grid->price('价格');
@@ -84,11 +97,11 @@ class SelfShoppingListController extends Controller
 
             };
         } else {
-            $show_func = function (Grid $grid) {
+            $show_func = function (Grid $grid) use ($brand_name) {
 
                 $grid->id('ID')->sortable();
                 $grid->product_name('产品');
-                $grid->brand_name('品牌');
+                $grid = $brand_name($grid);
                 $grid->purchase_channel('购买渠道');
                 $grid->num('数量');
                 $grid->price('价格');
@@ -99,6 +112,7 @@ class SelfShoppingListController extends Controller
                 return $grid;
             };
         }
+
         $c = function (Grid $grid) use ($show_func) {
             $grid = $show_func($grid);
             $grid->filter(function($filter){
@@ -143,9 +157,8 @@ class SelfShoppingListController extends Controller
 
     public function getBrandName($key = false)
     {
-        $arr = ['十月结晶','Pigeon/贝亲','好孩子','爱得利','开丽','日康','NUK',
-        // '黄色小鸭',// '贝恩宝',// '运智贝'
-        ];
+        $arr = config('customer.selfshoppinglist.brand');
+        $arr = array_column($arr, 'brand_name', 'id');
         if ($key !== false && isset($arr[$key])) {
             return $arr[$key];
         }

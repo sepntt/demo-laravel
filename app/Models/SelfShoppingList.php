@@ -22,4 +22,14 @@ class SelfShoppingList extends Model
 	{
 	    return json_decode($pictures, true);
 	}
+
+	public function getBrandNameAttribute($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function setBrandNameAttribute($value)
+    {
+        $this->attributes['brand_name'] = implode(',', $value);
+    }
 }
