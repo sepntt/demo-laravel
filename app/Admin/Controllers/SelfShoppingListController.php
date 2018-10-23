@@ -173,7 +173,7 @@ class SelfShoppingListController extends Controller
             $content->header('chart');
             $content->description('.....');
 
-            $content->body(view('admin.self.shopping.list'));
+            $content->body(view('admin.self.shopping.list', []));
         });
     }
 }

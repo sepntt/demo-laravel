@@ -21,5 +21,8 @@ Route::group([
 
     $router->get('self/shopping/list/create2', 'SelfShoppingListController@create2');
     $router->resource('self/shopping/list', 'SelfShoppingListController');
-
+    
+    $router->get('adminlte', function() {
+        return redirect('http://adminlte.la998.com/pages/widgets.html');
+    });
 });
