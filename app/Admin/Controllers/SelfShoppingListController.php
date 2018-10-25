@@ -80,7 +80,7 @@ class SelfShoppingListController extends Controller
                 foreach ($brand_name as $key => $value) {
                     $html[] = "<span class='badge bg-light-blue'>".$obj->getBrandName($value)."</span>";
                 }
-                return implode('', $html);
+                return implode('<br />', $html);
             });
             return $grid;
         };
@@ -90,9 +90,11 @@ class SelfShoppingListController extends Controller
 
                 $grid->product_name('产品');
                 $grid = $brand_name($grid);
-                $grid->purchase_channel('购买渠道');
-                $grid->num('数量');
-                $grid->price('价格');
+                $grid->purchase_channel('渠道');
+                $grid->num('数量')->editable();
+                $grid->price('价格')->editable();
+                //禁用批量操作
+                $grid->disableRowSelector();
                 return $grid;
 
             };
@@ -102,9 +104,9 @@ class SelfShoppingListController extends Controller
                 $grid->id('ID')->sortable();
                 $grid->product_name('产品');
                 $grid = $brand_name($grid);
-                $grid->purchase_channel('购买渠道');
-                $grid->num('数量');
-                $grid->price('价格');
+                $grid->purchase_channel('渠道');
+                $grid->num('数量')->editable();
+                $grid->price('价格')->editable();
                 $grid->pictures('图片')->image();
 
                 $grid->created_at();
@@ -115,6 +117,9 @@ class SelfShoppingListController extends Controller
 
         $c = function (Grid $grid) use ($show_func) {
             $grid = $show_func($grid);
+            $grid->actions(function ($actions) {
+                $actions->disableView();
+            });
             $grid->filter(function($filter){
                 // 去掉默认的id过滤器
                 $filter->disableIdFilter();
