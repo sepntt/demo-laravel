@@ -171,14 +171,4 @@ class SelfShoppingListController extends Controller
         # code...
     }
 
-    public function create2()
-    {
-        return Admin::content(function (Content $content) {
-
-            $content->header('chart');
-            $content->description('.....');
-
-            $content->body(view('admin.self.shopping.list', []));
-        });
-    }
 }
