@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $name = 'name';
+        $name = 'name111';
         return $this->render(['name' => $name],'index');
     }
 }

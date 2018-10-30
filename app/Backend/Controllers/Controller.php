@@ -33,10 +33,12 @@ class Controller extends BaseController
         $controller = end($namespace);
         $action = $router[1];
         $view_path = strtolower(substr($controller, 0, -10));
-        $view_path = $view ? $view_path.'.'.$view : $view_path.'.'.$action;
+        $view_path = $view ? ($view_path.'.'.$view) : ($view_path.'.'.$action);
         // if(!view()->exists($view_path)) {
             
         // }
+        $params['layouts'] = 'layouts';
+        $params['header'] = 'backend.public.';
         return view($view_path, $params);
     }
 }
