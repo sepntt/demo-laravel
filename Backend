@@ -1,0 +1,34 @@
+Backend
+	Config
+		app.php
+		database.php
+	Controllers
+		Controller.php
+		HomeController.php
+	Middleware
+		Auth.php
+	Providers
+		ModuleServiceProviders.php
+			register() 
+				Module
+				注册当前module配置文件
+					注册$app['config']['module.Backend'] = ['id' => 'Backend']
+				注册路由，($this->middleware)
+				注册模版
+	router.php
+Module
+	src
+		BaseServiceProviders.php
+		ModuleServiceProviders.php
+			$id 
+			$_basePath
+			$_viewPath
+			$_layoutPath
+		#ConfigServiceProviders.php#计划，先在Module里面全部实现
+		#RouterServiceProviders.php
+		#ViewServiceProviders.php
+
+config
+	app.php
+		ModuleServiceProviders::class,//注册module
+		App\Backend\Providers\ModuleServiceProviders::class,//注册Backend模块
