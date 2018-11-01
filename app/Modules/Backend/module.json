@@ -1,0 +1,10 @@
+{
+	# php artisan module:optimize
+	# Please enter the slug for the module: [backend]: Backend
+	# php artisan  make:module:controller Backend HomeController
+	# 修改routes->web.php->prefix->backend
+    "name": "Backend",
+    "slug": "Backend",
+    "version": "1.0",
+    "description": "This is the description for the Backend module."
+}
