@@ -13,9 +13,15 @@
 
 Route::group(['prefix' => 'backend'], function () {
     Route::get('/', function () {
+    	return redirect('backend/home');
     	// return view('Backend::home.index');
         dd('This is the Backend module index page. Build something great!');
     });
 
     Route::get('/home', 'HomeController@index');
+
+    Route::get('/user', 'UserController@index')->name('user');
+
+    Route::post('/user', 'UserController@store');
+
 });

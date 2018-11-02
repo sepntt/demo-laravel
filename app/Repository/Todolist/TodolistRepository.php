@@ -2,11 +2,12 @@
 
 namespace App\Repository\Todolist;
 
+use App\Repository\RepositoryAbstract;
 use App\Repository\Todolist\TodolistInterface;
 
 use App\Models\Todolist;
 
-class TodolistRepository implements TodolistInterface
+class TodolistRepository extends RepositoryAbstract implements TodolistInterface
 {
 
     public function list($request)

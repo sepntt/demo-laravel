@@ -12,7 +12,8 @@ class Repository
 
     public $singletons = [
         'App\Repository\Blog\PostsInterface' => 'App\Repository\Blog\PostsRepository',
-    	'App\Repository\Todolist\TodolistInterface' => 'App\Repository\Todolist\TodolistRepository',
+        'App\Repository\Todolist\TodolistInterface' => 'App\Repository\Todolist\TodolistRepository',
+    	'App\Repository\Backend\UserInterface' => 'App\Repository\Backend\UserRepository',
     ];
 
 

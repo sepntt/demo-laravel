@@ -34,12 +34,9 @@ class Controller extends \App\Http\Controllers\Controller
         $view_path = strtolower(substr($controller, 0, -10));
         $view_path = $view ? $view_path.'.'.$view : $view_path.'.'.$action;
         $view_path = $module.'::'.$view_path;
-        // Backend
+        // Backend 模版前缀
         $params['__module'] = function($str) use ($module) {
         	return $module.'::'.$str;
-        };
-        $params['__lang'] = function($str) use ($module) {
-        	return $module.'::'.'lang.'.$str;
         };
         return view($view_path, $params);
     }

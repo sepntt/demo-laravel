@@ -13,12 +13,13 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../Resources/Lang', 'Backend');
-        $this->loadViewsFrom(__DIR__.'/../Resources/Views', 'Backend');
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations', 'Backend');
         $this->loadConfigsFrom(__DIR__.'/../config');
+        // dd(app('config')['modules.id']);
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/Lang', app('config')['modules.id']);
+        $this->loadViewsFrom(__DIR__.'/../Resources/Views', app('config')['modules.id']);
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations', app('config')['modules.id']);
         $this->loadFactoriesFrom(__DIR__.'/../Database/Factories');
-        // require module_path('Backend', 'helpers.php');
+        require base_path('app/Helpers/helpers.php');
     }
 
     /**

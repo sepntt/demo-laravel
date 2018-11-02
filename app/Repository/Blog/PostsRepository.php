@@ -2,12 +2,13 @@
 
 namespace App\Repository\Blog;
 
+use App\Repository\RepositoryAbstract;
 use App\Repository\Blog\PostsInterface;
 
 use App\BlogPosts;
 use App\Models\BlogMessagesNotice;
 
-class PostsRepository implements PostsInterface
+class PostsRepository extends RepositoryAbstract implements PostsInterface
 {
 
     public function list($request)
