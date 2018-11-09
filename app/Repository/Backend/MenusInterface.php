@@ -3,7 +3,7 @@
 namespace App\Repository\Backend;
 
 
-interface UserInterface
+interface MenusInterface
 {
     //
 }

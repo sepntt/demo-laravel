@@ -5,11 +5,13 @@ namespace App\Modules\Backend\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
+use App\Repository\Backend\MenusInterface;
 
 class Controller extends \App\Http\Controllers\Controller
 {
     public function __construct()
     {
+
         $this->middleware('auth');
     }
     /**
@@ -38,6 +40,13 @@ class Controller extends \App\Http\Controllers\Controller
         $params['__module'] = function($str) use ($module) {
         	return $module.'::'.$str;
         };
+        $params['__menu'] = $this->getMenu();
         return view($view_path, $params);
+    }
+
+    public function getMenu()
+    {
+        $MenuInterface = app()->make(MenusInterface::class);
+        return $MenuInterface->toTree();
     }
 }

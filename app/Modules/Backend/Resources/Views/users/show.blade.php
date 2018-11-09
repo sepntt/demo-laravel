@@ -26,7 +26,7 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="{{ asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}" alt="User profile picture">
 
-              <h3 class="profile-username text-center">{{ Auth::user()->name}}</h3>
+              <h3 class="profile-username text-center">{{ $user->name}}</h3>
 
               <p class="text-muted text-center">Software Engineer</p>
 
@@ -310,19 +310,19 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane active" id="settings">
-                <form class="form-horizontal" action="{{ route('user') }}" method="POST" omsubmit="return submit();">
+                <form class="form-horizontal" action="{{ mUrl('user') }}" method="POST" omsubmit="return submit();">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                      <input type="name" class="form-control" id="inputName" placeholder="Name" value="{{Auth::user()->name}}">
+                      <input type="name" class="form-control" id="inputName" placeholder="Name" value="{{$user->name}}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" disabled value="{{Auth::user()->email}}">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" disabled value="{{$user->email}}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -350,7 +350,7 @@
                     <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <textarea class="form-control" name="experience" id="inputExperience" placeholder="Experience">{{ old('experience') }}</textarea>
                     </div>
                   </div>
                   <div class="form-group">
@@ -372,7 +372,7 @@
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       @csrf
-                      <input type="hidden" name="id" value="{{ Auth::user()->id }}" />
+                      <input type="hidden" name="id" value="{{ $user->id }}" />
                       <button type="submit" class="btn btn-danger" id="Submit">Submit</button>
                     </div>
                   </div>

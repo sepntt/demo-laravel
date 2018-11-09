@@ -12,11 +12,16 @@ abstract class RepositoryAbstract
 	
 	public $model;
 
+	public function get($id)
+	{
+		return $this->model::find($id);
+	}
+
 	public function list($request)
 	{
 		$where = [];
 		$model = $this->model::where($where)->orderBy('updated_at', 'desc');
-		$res = [$model->get(), $model->count()];
+		$res = [$model->get(), $model->count(), $model->paginate(10)];
 		return $res;
 	}
 

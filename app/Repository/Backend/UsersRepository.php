@@ -3,10 +3,10 @@
 namespace App\Repository\Backend;
 
 use App\Repository\RepositoryAbstract;
-use App\Repository\Backend\UserInterface;
+
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
-class UserRepository extends RepositoryAbstract implements UserInterface
+class UsersRepository extends RepositoryAbstract implements UsersInterface
 {
     use ResetsPasswords;
 
@@ -35,5 +35,7 @@ class UserRepository extends RepositoryAbstract implements UserInterface
         } while (false);
         return $res;
     }
+
+    
 
 }

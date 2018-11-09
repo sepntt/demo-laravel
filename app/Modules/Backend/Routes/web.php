@@ -18,10 +18,8 @@ Route::group(['prefix' => 'backend'], function () {
         dd('This is the Backend module index page. Build something great!');
     });
 
-    Route::get('/home', 'HomeController@index');
+    Route::resource('users','UsersController');
 
-    Route::get('/user', 'UserController@index')->name('user');
-
-    Route::post('/user', 'UserController@store');
+    Route::get('/auth/users', 'UsersController@index');//Route::get('/user/index', 'UserController@index');
 
 });
