@@ -12,11 +12,8 @@
 */
 
 Route::group(['prefix' => 'backend'], function () {
-    Route::get('/', function () {
-    	return redirect('backend/home');
-    	// return view('Backend::home.index');
-        dd('This is the Backend module index page. Build something great!');
-    });
+
+    Route::get('/', 'HomeController@index');
 
     Route::resource('users','UsersController');
 

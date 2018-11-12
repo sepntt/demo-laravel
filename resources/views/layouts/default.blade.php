@@ -63,7 +63,7 @@
                          document.getElementById('logout-form').submit();">
                   {{ __('Logout') }}
               </button>
-              <button class="dropdown-item" type="button" onclick="event.preventDefault();location.href='{{ url('backend/home') }}';">Backend</button>
+              <button class="dropdown-item" type="button" onclick="event.preventDefault();location.href='{{ url('backend') }}';">Backend</button>
               <button class="dropdown-item" type="button">Something else here</button>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

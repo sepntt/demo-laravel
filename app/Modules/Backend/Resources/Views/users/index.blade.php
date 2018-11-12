@@ -23,7 +23,7 @@
           <div class="box">
             <div class="box-header with-border">
 
-              <a href="{{ mUrlIndex() }}">
+              <a href="{{ mUrl('usesr/create') }}">
                 <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
               </a>
               <div class="input-group input-group-sm col-xs-2 pull-right">
@@ -52,7 +52,7 @@
                   <td>{{ $value['email'] }}</td>
                   <td>{{ $value['created_at'] }}</td>
                   <th>
-                    <a href="{{ mUrlShow()mUrl('user/'.$value['id']) }}">
+                    <a href="{{ mUrl('user/'.$value['id']) }}">
                       <i class="fa  fa-eye"></i>
                     </a>
                     <a href="{{ mUrl('user/'.$value['id'].'/edit') }}">
