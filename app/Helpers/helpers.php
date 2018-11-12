@@ -22,7 +22,7 @@ if( !function_exists('__lang') ) {
 
 if( !function_exists('mUrl') ) {
 
-	function mUrl($url)
+	function mUrl($url = '')
 	{
 		$modules = strtolower(app('config')['modules.id']);
 		return url($modules.'/'.$url);

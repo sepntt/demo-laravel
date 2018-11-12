@@ -23,7 +23,7 @@
           <div class="box">
             <div class="box-header with-border">
 
-              <a href="{{ mUrl('usesr/create') }}">
+              <a href="{{ mUrl('users/create') }}">
                 <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
               </a>
               <div class="input-group input-group-sm col-xs-2 pull-right">

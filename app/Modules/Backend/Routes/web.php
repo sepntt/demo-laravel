@@ -9,6 +9,9 @@
 | by your module. Just tell Laravel the URIs it should respond
 | to using a Closure or controller method. Build something great!
 |
+ * php artisan make:module backend
+ * php artisan make:module:controller backend HomeController\n
+ * 修改routes->web.php->prefix->backend
 */
 
 Route::group(['prefix' => 'backend'], function () {

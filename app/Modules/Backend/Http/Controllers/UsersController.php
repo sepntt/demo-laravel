@@ -12,6 +12,7 @@ class UsersController extends Controller
 
     public function __construct(UsersInterface $UsersInterface)
     {
+        parent::__construct();
         $UsersInterface = app()->make(UsersInterface::class);
         $this->Users = $UsersInterface;//构造函数的注入等于下面make
     }
