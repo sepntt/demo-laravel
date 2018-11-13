@@ -3,7 +3,6 @@
 namespace App\Repository\Todolist;
 
 use App\Repository\RepositoryAbstract;
-use App\Repository\Todolist\TodolistInterface;
 
 use App\Models\Todolist;
 

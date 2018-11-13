@@ -310,7 +310,7 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane active" id="settings">
-                <form class="form-horizontal" action="{{ mUrl('user') }}" method="POST" omsubmit="return submit();">
+                <form class="form-horizontal" action="{{ $__url('user') }}" method="POST" omsubmit="return submit();">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 

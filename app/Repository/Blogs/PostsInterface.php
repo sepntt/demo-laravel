@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\Blog;
+namespace App\Repository\Blogs;
 
 
 interface PostsInterface

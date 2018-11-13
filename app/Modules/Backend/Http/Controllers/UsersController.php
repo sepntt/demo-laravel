@@ -24,8 +24,8 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        list($data, $count, $page) = $this->Users->list($request);
-        return $this->render(['data' => $data, 'page' => $page, 'json_data' => json_encode($data)]);
+        list($count, $data) = $this->Users->list($request);
+        return $this->render(['data' => $data, 'json_data' => json_encode($data)]);
     }
 
     public function show($id)
@@ -69,15 +69,4 @@ class UsersController extends Controller
     {
         # code...
     }
-
-    public function users(Request $request)
-    {
-        list($data, $count, $page) = $this->Users->list($request);
-        return $this->render(['data' => $data, 'page' => $page, 'json_data' => json_encode($data)]);
-    }
-
-    // public function edit($id)
-    // {
-    //     # code...
-    // }
 }

@@ -1,4 +1,4 @@
-@extends($__module('layouts'))
+@extends($__layouts('layouts'))
 
 @section('content')
   <div class="content-wrapper">
@@ -23,11 +23,11 @@
           <div class="box">
             <div class="box-header with-border">
 
-              <a href="{{ $__url('users/create') }}">
+              <a href="{{ $__url('blogs/create') }}">
                 <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
               </a>
               <div class="input-group input-group-sm col-xs-2 pull-right">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="标题">
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                 </span>
@@ -40,26 +40,24 @@
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 10px">ID</th>
-                  <th>NAME</th>
-                  <th>EMAIL</th>
+                  <th>标题</th>
                   <th>Created at</th>
                   <th>Op</th>
                 </tr>
                 @foreach($data as $key => $value)
                 <tr>
                   <td>{{ $value['id'] }}</td>
-                  <td>{{ $value['name'] }}</td>
-                  <td>{{ $value['email'] }}</td>
+                  <td>{{ $value['title'] }}</td>
                   <td>{{ $value['created_at'] }}</td>
                   <th>
-                    <a href="{{ $__url('user/'.$value['id']) }}">
+                    <a href="{{ $__url('blogs/'.$value['id']) }}">
                       <i class="fa  fa-eye"></i>
                     </a>
-                    <a href="{{ $__url('user/'.$value['id'].'/edit') }}">
+                    <a href="{{ $__url('blogs/'.$value['id'].'/edit') }}">
                       <i class="fa fa-edit"></i>
                     </a>
                     @if($value['id'] != 1)
-                    <a href="{{ $__url('user/'.$value['id'].'/destroy') }}">
+                    <a href="{{ $__url('blogs/'.$value['id'].'/destroy') }}">
                       <i class="fa fa-trash"></i>
                     </a>
                     @endif

@@ -2,17 +2,17 @@
 
 namespace App\Modules\Auth\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 trait Backend
 {
-    public function getBackend()
-    {
-    	$this->getMiddleware();
-    	
-    }
 
-    public function getMiddleware()
+	public function _getLayouts($layouts = false)
+	{
+		$trait = explode('\\', __TRAIT__);
+
+		return end($trait);
+	}
+	
+    public function _getMiddleware()
     {
     	$this->middleware('auth');
     }

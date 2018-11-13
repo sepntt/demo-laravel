@@ -12,6 +12,8 @@ abstract class RepositoryAbstract
 	
 	public $model;
 
+	public $paginate = 10;
+
 	public function get($id)
 	{
 		return $this->model::find($id);
@@ -21,7 +23,7 @@ abstract class RepositoryAbstract
 	{
 		$where = [];
 		$model = $this->model::where($where)->orderBy('updated_at', 'desc');
-		$res = [$model->get(), $model->count(), $model->paginate(10)];
+		$res = [$model->count(), $model->paginate($this->paginate)];
 		return $res;
 	}
 

@@ -50,11 +50,11 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   
-  @include($__module('header'))
+  @include($__layouts('header'))
   
   <!-- Left side column. contains the logo and sidebar -->
 
-  @include($__module('left'))
+  @include($__layouts('left'))
     
 
 <!-- Content Wrapper. Contains page content -->
@@ -62,10 +62,10 @@
 	@yield('content')
 
 <!-- /.content-wrapper -->
-  @include($__module('footer'))
+  @include($__layouts('footer'))
 
   <!-- Control Sidebar -->
-  @include($__module('sidebar'))
+  @include($__layouts('sidebar'))
   <!-- /.control-sidebar -->
 
   <!-- Add the sidebar's background. This div must be placed

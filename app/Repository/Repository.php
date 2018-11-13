@@ -11,7 +11,7 @@ class Repository
 	public $Storage;
 
     public $singletons = [
-        'App\Repository\Blog\PostsInterface' => 'App\Repository\Blog\PostsRepository',
+        'App\Repository\Blogs\PostsInterface' => 'App\Repository\Blogs\PostsRepository',
         'App\Repository\Todolist\TodolistInterface' => 'App\Repository\Todolist\TodolistRepository',
         'App\Repository\Backend\UsersInterface' => 'App\Repository\Backend\UsersRepository',
     	'App\Repository\Backend\MenusInterface' => 'App\Repository\Backend\MenusRepository',

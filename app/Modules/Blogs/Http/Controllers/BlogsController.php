@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Modules\Blog\Http\Controllers;
+namespace App\Modules\Blogs\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
+use App\Repository\Blogs\PostsInterface;
 
-class BlogsController extends Controller
+class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        dd(1);
+        $PostsInterface = app()->make(PostsInterface::class);
+        list($count, $data) = $PostsInterface->list($request);
+        return $this->render(['data' => $data, 'json_data' => json_encode($data)]);
     }
 
     /**
@@ -26,7 +27,7 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        //
+        return $this->render();
     }
 
     /**

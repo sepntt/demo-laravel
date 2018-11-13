@@ -24,7 +24,7 @@
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
-      @include($__module('menu'))
+      @include($__layouts('menu'))
       
     </section>
     <!-- /.sidebar -->
