@@ -28,27 +28,30 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" autocomplete="new-password">
+            <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="title" class="col-sm-2 control-label">标题</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="title" placeholder="标题">
+                    <input type="text" class="form-control" id="title" placeholder="标题">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                  <label for="title" class="col-sm-2 control-label">内容</label>
 
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <textarea id="editor1" name="editor1" rows="10" cols="80">
+                                            This is my textarea to be replaced with CKEditor.
+                    </textarea>
                   </div>
+                    
                 </div>
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox"> Remember me
+                        <input type="checkbox" class="js-push" name="push"> <span id="push" style="display: none;">发布</span><span id="draft">草稿</span>
                       </label>
                     </div>
                   </div>
@@ -68,4 +71,37 @@
     </section>
     <!-- /.content -->
   </div>
+<!-- CK Editor -->
+<script src="{{ asset('packages/ckeditor/ckeditor.js') }}"></script>
+
+<script type="text/javascript">
+  $(function(){
+    CKEDITOR.replace( 'editor1' , {
+        removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor'
+        ,codeSnippet_languages : {
+            javascript: 'JavaScript',
+            php: 'PHP',
+            bash: 'Bash',
+            python: 'Python',
+            c: 'C',
+            json: 'Json'
+        },
+        // width : 820,
+        height : 600,
+        filebrowserUploadUrl  : '/admin/blog/upload?_token={$csrf}'
+        // ,extraAllowedContent : '*{*}'
+        , extraPlugins : 'codesnippetgeshi'
+        , codeSnippetGeshi_url : '/packages/lib/geshi/colorize.php'//单独的geshi php类库
+    });
+    $('.js-push').on('click', function(obj){
+      if($('.js-push').prop('checked')) {
+        $('#push').show();
+        $('#draft').hide();
+      } else {
+        $('#draft').show();
+        $('#push').hide();
+      }
+    })
+  })
+</script>
 @endsection

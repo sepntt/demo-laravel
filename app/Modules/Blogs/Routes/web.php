@@ -20,7 +20,7 @@ Route::group(['prefix' => 'blogs'], function () {
     
 });
 
-Route::group(['prefix' => 'backend'], function () {
-    Route::get('blog/blog','BlogsController@index');
-    Route::resource('blogs','BlogsController');
-});
+// Route::group(['prefix' => 'backend'], function () {
+//     Route::resource('blogs','BlogsController');
+// });
+Route::get('blog/blog','BlogsController@index');

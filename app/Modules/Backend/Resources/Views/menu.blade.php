@@ -5,7 +5,7 @@
               @if(url()->isValidUrl($item['uri']))
                   <a href="{{ $item['uri'] }}" target="_blank">
               @else
-                   <a href="{{ $__url($item['uri']) }}">
+                   <a href="{{ url($item['uri']) }}">
               @endif
                   <i class="fa {{$item['icon']}}"></i>
                   <span>{{ $item['title'] }}</span>
@@ -22,7 +22,7 @@
             <ul class="treeview-menu">
                 @foreach($item['children'] as $item)
                   <li>
-                    <a href="{{ $__url($item['uri']) }}">
+                    <a href="{{ url($item['uri']) }}">
                       <i class="fa fa-share {{ $item['icon'] }}"></i> <span>{{ $item['title'] }}</span>
                     </a>
                   </li>

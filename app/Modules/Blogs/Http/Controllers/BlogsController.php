@@ -15,8 +15,9 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
+        
         $PostsInterface = app()->make(PostsInterface::class);
-        list($count, $data) = $PostsInterface->list($request);
+        list($count, $data) = $PostsInterface->index($request);
         return $this->render(['data' => $data, 'json_data' => json_encode($data)]);
     }
 
@@ -38,7 +39,9 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function store(Request $request)
     {
-        //
+        $PostsInterface = app()->make(PostsInterface::class);
+        list($count, $data) = $PostsInterface->store($request);
+        return $this->render();
     }
 
     /**
@@ -49,7 +52,9 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function show($id)
     {
-        //
+        $PostsInterface = app()->make(PostsInterface::class);
+        list($count, $data) = $PostsInterface->show($request);
+        return $this->render();
     }
 
     /**
@@ -60,7 +65,9 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function edit($id)
     {
-        //
+        $PostsInterface = app()->make(PostsInterface::class);
+        list($count, $data) = $PostsInterface->list($request);
+        return $this->render();
     }
 
     /**

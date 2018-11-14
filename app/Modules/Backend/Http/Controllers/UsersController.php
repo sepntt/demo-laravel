@@ -24,7 +24,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        list($count, $data) = $this->Users->list($request);
+        list($count, $data) = $this->Users->index($request);
         return $this->render(['data' => $data, 'json_data' => json_encode($data)]);
     }
 
@@ -33,7 +33,7 @@ class UsersController extends Controller
         if(is_null($id)) {
             $id = app('Auth')::user()->id;
         }
-        $user = $this->Users->get($id);
+        $user = $this->Users->show($id);
         return $this->render(['user' => $user]);
     }
 
@@ -56,7 +56,7 @@ class UsersController extends Controller
         if(is_null($id)) {
             $id = app('Auth')::user()->id;
         }
-        $user = $this->Users->get($id);
+        $user = $this->Users->show($id);
         return $this->render(['user' => $user]);
     }
 
