@@ -9,4 +9,6 @@ class BlogPosts extends Model
 {
     //
     use SoftDeletes;
+
+    protected $fillable = ['title', 'body'];
 }

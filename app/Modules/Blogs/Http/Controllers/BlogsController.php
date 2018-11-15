@@ -15,7 +15,7 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
-        
+
         $PostsInterface = app()->make(PostsInterface::class);
         list($count, $data) = $PostsInterface->index($request);
         return $this->render(['data' => $data, 'json_data' => json_encode($data)]);
@@ -39,9 +39,21 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function store(Request $request)
     {
-        $PostsInterface = app()->make(PostsInterface::class);
-        list($count, $data) = $PostsInterface->store($request);
-        return $this->render();
+        $res = false;
+        do {
+            $PostsInterface = app()->make(PostsInterface::class);
+            try {
+                if($PostsInterface->store($request)) {
+                    return redirect('blogs/blogs')->with('success', '日志添加成功!');
+                }
+            } catch (\Illuminate\Database\QueryException $e) {
+                return back()->with('warning',$e->getMessage())->withInput();
+            }
+        } while (false);
+        if($res === false) {
+            return back()->with('warning','日志添加失败!')->withInput();
+        }
+        
     }
 
     /**
@@ -66,8 +78,7 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
     public function edit($id)
     {
         $PostsInterface = app()->make(PostsInterface::class);
-        list($count, $data) = $PostsInterface->list($request);
-        return $this->render();
+        return $this->render(['data' => $PostsInterface->edit($id)]);
     }
 
     /**
@@ -79,7 +90,20 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $res = false;
+        do {
+            $PostsInterface = app()->make(PostsInterface::class);
+            try {
+                if($PostsInterface->update($request, $id)) {
+                    return redirect('blogs/blogs')->with('success', '日志修改成功!');
+                }
+            } catch (\Illuminate\Database\QueryException $e) {
+                return back()->with('warning',$e->getMessage())->withInput();
+            }
+        } while (false);
+        if($res === false) {
+            return back()->with('warning','日志修改失败!')->withInput();
+        }
     }
 
     /**
@@ -90,6 +114,10 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function destroy($id)
     {
-        //
+        $PostsInterface = app()->make(PostsInterface::class);
+        if($PostsInterface->destroy($id)) {
+            return redirect('blogs/blogs')->with('success', '删除成功!');
+        }
+        return redirect('blogs/blogs')->with('warning', '删除失败!');
     }
 }

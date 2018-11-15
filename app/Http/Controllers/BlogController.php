@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Repository\Blog\PostsInterface;
+use App\Repository\Blogs\PostsInterface;
 
 class BlogController extends Controller
 {
@@ -25,7 +25,7 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        list($list, $count) = $this->Posts->list($request);
+        list($count, $list) = $this->Posts->index($request);
         // \DB::connection()->enableQueryLog();
         $notice = $this->Posts->getNotice();
         // $log = \DB::getQueryLog();

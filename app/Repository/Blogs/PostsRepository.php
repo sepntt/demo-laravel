@@ -14,13 +14,6 @@ class PostsRepository extends RepositoryAbstract implements PostsInterface
 
     public $paginate = 5;
 
-    public function show($id)
-    {
-    	return BlogPosts::find($id);
-    	$BlogPosts = new BlogPosts();
-
-    	return $BlogPosts->where('id', '=', $id)->get();
-    }
 
     public function getNotice()
     {

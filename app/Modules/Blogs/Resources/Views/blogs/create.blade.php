@@ -17,6 +17,7 @@
 
     <!-- Main content -->
     <section class="content">
+      @include($__layouts('tip'))
 
       <div class="row">
 
@@ -28,39 +29,41 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="POST" action="{{ $__url('blogs') }}">
               <div class="box-body">
                 <div class="form-group">
                   <label for="title" class="col-sm-2 control-label">标题</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" placeholder="标题">
+                    <input type="text" name="title" class="form-control" value="{{ old('title') }}" id="title" placeholder="标题">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="title" class="col-sm-2 control-label">内容</label>
 
                   <div class="col-sm-10">
-                    <textarea id="editor1" name="editor1" rows="10" cols="80">
-                                            This is my textarea to be replaced with CKEditor.
+                    <textarea id="editor1" name="body" rows="10" cols="80">
+                                            {{ old('body') }}
                     </textarea>
                   </div>
                     
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" class="js-push" name="push"> <span id="push" style="display: none;">发布</span><span id="draft">草稿</span>
-                      </label>
-                    </div>
+                  <label for="title" class="col-sm-2 control-label">状态</label>
+                  <div class="col-sm-2">
+                    <select class="form-control">
+                      <option value="1">发布</option>
+                      <option value="2" selected >草稿</option>
+                    </select>
                   </div>
                 </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+                <div class="col-sm-offset-2 col-sm-10">
+                  @csrf
+                  <button type="submit" class="btn btn-info pull-left">提交</button>
+                </div>
               </div>
               <!-- /.box-footer -->
             </form>
@@ -93,15 +96,6 @@
         , extraPlugins : 'codesnippetgeshi'
         , codeSnippetGeshi_url : '/packages/lib/geshi/colorize.php'//单独的geshi php类库
     });
-    $('.js-push').on('click', function(obj){
-      if($('.js-push').prop('checked')) {
-        $('#push').show();
-        $('#draft').hide();
-      } else {
-        $('#draft').show();
-        $('#push').hide();
-      }
-    })
   })
 </script>
 @endsection

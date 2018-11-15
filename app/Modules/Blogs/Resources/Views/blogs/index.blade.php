@@ -17,6 +17,7 @@
 
     <!-- Main content -->
     <section class="content">
+      @include($__layouts('tip'))
 
       <div class="row">
         <div class="col-md-12">

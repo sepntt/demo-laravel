@@ -17,6 +17,8 @@ Route::group(['prefix' => 'blogs'], function () {
     });
 
     Route::resource('blogs','BlogsController');
+    Route::get('blogs/{id}/destroy','BlogsController@destroy');
+    Route::post('blogs/{id}/update','BlogsController@update');
     
 });
 

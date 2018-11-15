@@ -46,11 +46,11 @@ abstract class RepositoryAbstract
      */
     public function store(Request $request)
     {
-		$model = $this->model;
-		// $model->title = $request->post('title');
-		// $model->body = $request->post('body');
-		// $model->push = $request->post('push');
-		return $model->save($request->post());
+		$model = new $this->model($request->post());
+		if($model->save()) {
+			return $model->id;
+		}
+		return false;
     }
 
     /**
@@ -84,7 +84,7 @@ abstract class RepositoryAbstract
      */
     public function update(Request $request, $id)
     {
-        //
+    	return $this->model::where('id', $id)->update($request->post());
     }
 
     /**
@@ -95,7 +95,7 @@ abstract class RepositoryAbstract
      */
     public function destroy($id)
     {
-        //
+        return $this->model::destroy($id);
     }
 
 
