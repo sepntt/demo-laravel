@@ -24,7 +24,7 @@
 
           <div class="card-body">
             <h5 class="card-title"><a href="/blog/show/{{$show->id}}" class="text-dark card-link" ><b>{{$show->title}}</b></a></h5>
-            <p class="card-text"><?=$show->body;?></p>
+            <p class="card-text"><?php echo $show->body;?>{!! $show->body;!!}</p>
             <p class="card-text text-right"><a href="/blog/show/{{$show->id}}" class="card-link"><small class="text-muted">{{$show->created_at}}</small></a></p>
           </div>
         </div>

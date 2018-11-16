@@ -11,16 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'blogs'], function () {
+Route::group(['prefix' => 'frontend'], function () {
     Route::get('/', function () {
-        dd('This is the Blog module index page. Build something great!');
+        dd('This is the Frontend module index page. Build something great!');
     });
-
-    Route::resource('blogs','BlogsController');
-    
 });
-
-// Route::group(['prefix' => 'backend'], function () {
-//     Route::resource('blogs','BlogsController');
-// });
-Route::get('blog/blog','BlogsController@index');

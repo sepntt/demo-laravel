@@ -19,6 +19,7 @@ Route::group(['prefix' => 'backend'], function () {
     Route::get('/', 'HomeController@index');
 
     Route::resource('users','UsersController');
+    Route::resource('upload','UploadController');
 });
 
 Route::get('/auth/users', 'UsersController@index');//Route::get('/user/index', 'UserController@index');

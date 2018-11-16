@@ -1,31 +1,22 @@
 <?php
 
-namespace App\Repository;
+namespace App\Modules\Backend\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-/**
-* 
-*/
-abstract class RepositoryAbstract
+use App\Repository\Backend\UploadInterface;
+
+class UploadController extends Controller
 {
-	
-	public $model;
-
-	public $paginate = 10;
-
-	/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-    	$where = [];
-		$model = $this->model::where($where)->orderBy('updated_at', 'desc');
-		$res = [$model->count(), $model->paginate($this->paginate)];
-		return $res;
+        $Upload = app()->make(UploadInterface::class);
+    	return $Upload->index($request);
     }
 
     /**
@@ -35,7 +26,7 @@ abstract class RepositoryAbstract
      */
     public function create()
     {
-        return $this->render();
+        //
     }
 
     /**
@@ -46,11 +37,20 @@ abstract class RepositoryAbstract
      */
     public function store(Request $request)
     {
-		$model = new $this->model($request->post());
-		if($model->save()) {
-			return $model->id;
-		}
-		return false;
+    	$re = ['uploaded' => 1, 'url' => '/'];
+    	try {
+    		$file = $request->file('upload');
+	        $Storage = Storage::disk('backend');
+	        $url = $Storage->url($Storage->putFile('upload', $request->file('upload')));
+	        $re['uploaded'] = 1;
+	        $re['url'] = $url;
+	        $Upload = app()->make(UploadInterface::class);
+	        $Upload->store();
+    	} catch (Exception $e) {
+    		$re['uploaded'] = 0;
+    		$re['message'] = $e->getMessage();
+    	}
+	    return $re;
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class RepositoryAbstract
      */
     public function show($id)
     {
-		return $this->model::find($id);
+        //
     }
 
     /**
@@ -72,7 +72,7 @@ abstract class RepositoryAbstract
      */
     public function edit($id)
     {
-    	return $this->show($id);
+        //
     }
 
     /**
@@ -84,8 +84,7 @@ abstract class RepositoryAbstract
      */
     public function update(Request $request, $id)
     {
-    	$model = new $this->model;
-    	return $model->where('id', $id)->update($request->only($model->fillable));
+        //
     }
 
     /**
@@ -96,20 +95,6 @@ abstract class RepositoryAbstract
      */
     public function destroy($id)
     {
-        return $this->model::destroy($id);
+        //
     }
-
-
-	public function test($request)
-	{
-		dd($request->post());
-		\DB::connection()->enableQueryLog();
-		$model = $this->model::find(1);
-		if(empty($model)) {
-			dd(1);
-			$model->create($request->post());
-		}
-		// dd(\DB::getQueryLog());
-		return $model->save($request->post());
-	}
 }

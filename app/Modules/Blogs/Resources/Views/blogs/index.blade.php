@@ -51,14 +51,14 @@
                   <td>{{ $value['title'] }}</td>
                   <td>{{ $value['created_at'] }}</td>
                   <th>
-                    <a href="{{ $__url('blogs/'.$value['id']) }}">
+                    <a href="{{ url('blog/show/'.$value['id']) }}">
                       <i class="fa  fa-eye"></i>
                     </a>
                     <a href="{{ $__url('blogs/'.$value['id'].'/edit') }}">
                       <i class="fa fa-edit"></i>
                     </a>
                     @if($value['id'] != 1)
-                    <a href="{{ $__url('blogs/'.$value['id'].'/destroy') }}">
+                    <a herf="javascript:void(0);" class="js-destroy" data-url="{{ $__url('blogs/'.$value['id']) }}">
                       <i class="fa fa-trash"></i>
                     </a>
                     @endif
@@ -84,4 +84,45 @@
     </section>
     <!-- /.content -->
   </div>
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">提示</h4>
+        </div>
+        <div class="modal-body">
+          <p>确认本次操作?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary js-confirm" data-url="">确认</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+<form id="js-destroy" action="" method="POST">
+  @csrf
+  @method('DELETE')
+</form>
+<script type="text/javascript">
+  $(function() {
+    $('.js-destroy').on('click', function(){
+      var obj = this;
+      $('#modal-default').modal()
+      $('#modal-default .js-confirm').data('url', $(obj).data('url'))
+      $('#modal-default .js-confirm').off('click').on('click', function() {
+        var obj = this
+        var url = $(obj).data('url')
+        var form = $('#js-destroy')
+        form.attr('action', url)
+        form.submit()
+      })
+    })
+  })
+</script>
 @endsection

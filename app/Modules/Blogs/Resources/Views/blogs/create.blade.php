@@ -41,11 +41,12 @@
                 <div class="form-group">
                   <label for="title" class="col-sm-2 control-label">内容</label>
 
-                  <div class="col-sm-10">
-                    <textarea id="editor1" name="body" rows="10" cols="80">
-                                            {{ old('body') }}
-                    </textarea>
+                  <div class="col-sm-10" id="editor1">
+                    {{ old('body') }}
                   </div>
+                  <textarea id="editor2" name="body" style="display: none">
+                    {{ old('body') }}
+                  </textarea>
                     
                 </div>
                 <div class="form-group">
@@ -74,28 +75,18 @@
     </section>
     <!-- /.content -->
   </div>
-<!-- CK Editor -->
-<script src="{{ asset('packages/ckeditor/ckeditor.js') }}"></script>
-
+<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
 <script type="text/javascript">
-  $(function(){
-    CKEDITOR.replace( 'editor1' , {
-        removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor'
-        ,codeSnippet_languages : {
-            javascript: 'JavaScript',
-            php: 'PHP',
-            bash: 'Bash',
-            python: 'Python',
-            c: 'C',
-            json: 'Json'
-        },
-        // width : 820,
-        height : 600,
-        filebrowserUploadUrl  : '/admin/blog/upload?_token={$csrf}'
-        // ,extraAllowedContent : '*{*}'
-        , extraPlugins : 'codesnippetgeshi'
-        , codeSnippetGeshi_url : '/packages/lib/geshi/colorize.php'//单独的geshi php类库
-    });
+  $(function() {
+    var E = window.wangEditor
+    var editor = new E('#editor1')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.customConfig.uploadImgShowBase64 = true
+    editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            $('#editor2').val(html)
+        }
+    editor.create()
   })
 </script>
 @endsection
