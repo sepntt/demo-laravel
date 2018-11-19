@@ -64,8 +64,12 @@ class BlogsController extends \App\Modules\Backend\Http\Controllers\Controller
      */
     public function show($id)
     {
+        $isjson = \Illuminate\Support\Facades\Input::get('_json');
         $PostsInterface = app()->make(PostsInterface::class);
-        list($count, $data) = $PostsInterface->show($request);
+        $data = $PostsInterface->show($id);
+        if($isjson) {
+            return $data;
+        }
         return $this->render();
     }
 

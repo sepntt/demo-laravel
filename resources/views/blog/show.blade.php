@@ -1,10 +1,6 @@
 @extends('layouts.default')
-
-<link rel="stylesheet" href="{{ asset('packages/highlight/styles/default.css') }}">
-<script src="{{ asset('packages/highlight/highlight.pack.js') }}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 @section('content')
+<link rel="stylesheet" href="{{ asset('packages/editor.md/css/editormd.min.css') }}">
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -24,7 +20,11 @@
 
           <div class="card-body">
             <h5 class="card-title"><a href="/blog/show/{{$show->id}}" class="text-dark card-link" ><b>{{$show->title}}</b></a></h5>
-            <p class="card-text"><?php echo $show->body;?>{!! $show->body;!!}</p>
+            <p class="card-text">
+                <div id="test-editormd">
+                  <textarea class="hide" id="test-editormd-markdown-doc" name="test-editormd-markdown-doc">{{$show->body}}</textarea>               
+                </div>
+              </p>
             <p class="card-text text-right"><a href="/blog/show/{{$show->id}}" class="card-link"><small class="text-muted">{{$show->created_at}}</small></a></p>
           </div>
         </div>
@@ -112,4 +112,28 @@
     </div>
   </div>
 </div>
+<script src="{{ asset('packages/editor.md/lib/marked.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/lib/prettify.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/lib/raphael.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/lib/underscore.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/lib/sequence-diagram.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/lib/flowchart.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/lib/jquery.flowchart.min.js') }}"></script>
+<script src="{{ asset('packages/editor.md/editormd.min.js') }}"></script>
+<script type="text/javascript">
+  var testEditor;
+  
+  $(function() {
+      testEditormdView2 = editormd.markdownToHTML("test-editormd", {
+          htmlDecode      : "style,script,iframe",  // you can filter tags decode
+          emoji           : true,
+          taskList        : true,
+          tex             : true,  // 默认不解析
+          flowChart       : true,  // 默认不解析
+          sequenceDiagram : true,  // 默认不解析
+      });
+
+  });
+
+</script>
 @endsection

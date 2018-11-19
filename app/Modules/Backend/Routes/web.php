@@ -20,6 +20,9 @@ Route::group(['prefix' => 'backend'], function () {
 
     Route::resource('users','UsersController');
     Route::resource('upload','UploadController');
+
+    Route::get('markdown/create/{config}','MarkdownController@create');
+    Route::get('markdown/config','MarkdownController@config');
 });
 
 Route::get('/auth/users', 'UsersController@index');//Route::get('/user/index', 'UserController@index');

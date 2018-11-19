@@ -1,6 +1,6 @@
 @extends($__layouts('layouts'))
-
 @section('content')
+  <link rel="stylesheet" href="{{ asset('packages/editor.md/css/editormd.min.css') }}">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -22,49 +22,38 @@
       <div class="row">
 
         <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info">
+          <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Horizontal Form</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="{{ $__url('blogs/'.$data['id']) }}">
+            <form method="POST" action="{{ $__url('blogs/'.$data['id']) }}">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="title" class="col-sm-2 control-label">标题</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" name="title" class="form-control" value="{{ (old('title')?old('title'):(isset($data['title'])?$data['title']:'')) }}" id="title" placeholder="标题">
+                  <label for="title">标题</label>
+                  <input type="text" name="title" class="form-control" id="title" value="{{ old('title', $data['title']) }}" id="title" placeholder="标题">
+                </div>
+                <div class="form-group">
+                  <label for="body">内容</label>
+                  <!-- <label for="body"><a href="{{ url('backend/markdown/create', ['config' => json_encode(['blogs','blogs/0'])]) }}">全屏编辑</a></label> -->
+                  <div id="test-editormd">
+                    <textarea id="test-editormd-markdown-doc" name="body" class="hide">{!!old('body', $data['body'])!!}</textarea>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="title" class="col-sm-2 control-label">内容</label>
-                  <div class="col-sm-10" id="editor1">
-                    {!!old('body', $data['body'])!!}
-                  </div>
-                  <textarea id="editor2" name="body" style="display: none">
-                    {!!old('body', $data['body'])!!}
-                  </textarea>
-
-                </div>
-                <div class="form-group">
-                  <label for="title" class="col-sm-2 control-label">状态</label>
-                  <div class="col-sm-2">
-                    <select class="form-control">
-                      <option value="1">发布</option>
-                      <option value="2" selected >草稿</option>
-                    </select>
-                  </div>
+                  <label for="push">状态</label>
+                  <select class="form-control">
+                    <option value="1">发布</option>
+                    <option value="2" selected >草稿</option>
+                  </select>
                 </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <div class="col-sm-offset-2 col-sm-10">
-                  @csrf
+                @csrf
                   @method('PUT')
-                  <button type="submit" class="btn btn-info pull-left">提交</button>
-                </div>
+                <button type="submit" class="btn btn-info pull-left">提交</button>
               </div>
               <!-- /.box-footer -->
             </form>
@@ -75,21 +64,15 @@
     </section>
     <!-- /.content -->
   </div>
-<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+<script src="{{ asset('packages/editor.md/editormd.min.js') }}"></script>
 <script type="text/javascript">
+  var testEditor;
+  
   $(function() {
-    var E = window.wangEditor
-    var editor = new E('#editor1')
-    // 或者 var editor = new E( document.getElementById('editor') )
-    editor.customConfig.uploadImgShowBase64 = true
-    editor.customConfig.onchange = function (html) {
-            // 监控变化，同步更新到 textarea
-            $('#editor2').val(html)
-        }
-    editor.create()
-    // var html = "<?=(old('body')?old('body'):(isset($data['body'])?$data['body']:''))?>"
-    // editor.txt.html(html)
-    // $('#editor2').val(html)
-  })
+      $.get('{{ url('backend/markdown/config') }}', function(md){
+          testEditor = editormd("test-editormd", md);
+      });
+  });
+
 </script>
 @endsection

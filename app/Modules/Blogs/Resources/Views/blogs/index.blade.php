@@ -1,5 +1,4 @@
 @extends($__layouts('layouts'))
-
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -51,7 +50,7 @@
                   <td>{{ $value['title'] }}</td>
                   <td>{{ $value['created_at'] }}</td>
                   <th>
-                    <a href="{{ url('blog/show/'.$value['id']) }}">
+                    <a href="{{ url('blog/show/'.$value['id']) }}" target="_blank">
                       <i class="fa  fa-eye"></i>
                     </a>
                     <a href="{{ $__url('blogs/'.$value['id'].'/edit') }}">
