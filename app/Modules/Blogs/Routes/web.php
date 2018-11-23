@@ -17,6 +17,7 @@ Route::group(['prefix' => 'blogs'], function () {
     });
 
     Route::resource('blogs','BlogsController');
+    Route::resource('blog-message-notices','BlogMessageNoticesController');
     
 });
 
@@ -24,3 +25,4 @@ Route::group(['prefix' => 'blogs'], function () {
 //     Route::resource('blogs','BlogsController');
 // });
 Route::get('blog/blog','BlogsController@index');
+Route::get('blog/blog_messages_notice','BlogMessageNoticesController@index');

@@ -11,8 +11,6 @@
 |
 */
 
-// dd(Route::getGroupStack());
-
 Route::get('/', function () {
     return view('welcome');
 });

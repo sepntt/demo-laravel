@@ -21,4 +21,12 @@ class PostsRepository extends RepositoryAbstract implements PostsInterface
         $notice->messages = $notice->messages->first();
         return $notice;
     }
+
+    public function noticesIndex($request)
+    {
+    	$where = [];
+		$model = BlogMessagesNotice::with('messages')->where($where)->orderBy('updated_at', 'desc');
+		$res = [$model->count(), $model->paginate($this->paginate)];
+		return $res;
+    }
 }

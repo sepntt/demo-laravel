@@ -1,31 +1,26 @@
 <?php
 
-namespace App\Repository;
+namespace App\Modules\Blogs\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-/**
-* 
-*/
-abstract class RepositoryAbstract
+use App\Repository\Blogs\PostsInterface;
+
+class BlogMessageNoticesController extends \App\Modules\Backend\Http\Controllers\Controller
 {
-	
-	public $model;
-
-	public $paginate = 10;
-
-	/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-    	$where = [];
-		$model = $this->model::where($where)->orderBy('updated_at', 'desc');
-		$res = [$model->count(), $model->paginate($this->paginate)];
-		return $res;
+
+        $Posts = app()->make(PostsInterface::class);
+        $Posts->model(\App\Models\BlogMessagesNotice::class);
+        list($count, $data) = $Posts->noticesIndex($request);
+        
+        return $this->render(['data' => $data, 'json_data' => json_encode($data)]);
     }
 
     /**
@@ -46,11 +41,7 @@ abstract class RepositoryAbstract
      */
     public function store(Request $request)
     {
-		$model = new $this->model($request->post());
-		if($model->save()) {
-			return $model->id;
-		}
-		return false;
+        //
     }
 
     /**
@@ -61,7 +52,7 @@ abstract class RepositoryAbstract
      */
     public function show($id)
     {
-		return $this->model::find($id);
+        //
     }
 
     /**
@@ -72,7 +63,7 @@ abstract class RepositoryAbstract
      */
     public function edit($id)
     {
-    	return $this->show($id);
+        //
     }
 
     /**
@@ -84,8 +75,7 @@ abstract class RepositoryAbstract
      */
     public function update(Request $request, $id)
     {
-    	$model = new $this->model;
-    	return $model->where('id', $id)->update($request->only($model->fillable));
+        //
     }
 
     /**
@@ -96,28 +86,6 @@ abstract class RepositoryAbstract
      */
     public function destroy($id)
     {
-        return $this->model::destroy($id);
+        //
     }
-
-
-    public function model($model = false)
-    {
-        if($model) {
-            $this->model = $model;
-        }
-        return $this->model;
-    }
-
-	public function test($request)
-	{
-		dd($request->post());
-		\DB::connection()->enableQueryLog();
-		$model = $this->model::find(1);
-		if(empty($model)) {
-			dd(1);
-			$model->create($request->post());
-		}
-		// dd(\DB::getQueryLog());
-		return $model->save($request->post());
-	}
 }

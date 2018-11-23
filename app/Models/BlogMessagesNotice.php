@@ -14,7 +14,7 @@ class BlogMessagesNotice extends Model
 
     protected $table = 'blog_messages_notice';
 
-    public function messageBelongsTo()
+    public function messagebelongsto()
     {
     	return $this->belongsTo(Messages::class);
     }
