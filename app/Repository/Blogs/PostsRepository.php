@@ -29,4 +29,18 @@ class PostsRepository extends RepositoryAbstract implements PostsInterface
 		$res = [$model->count(), $model->paginate($this->paginate)];
 		return $res;
     }
+
+    public function noticesAlert()
+    {
+        return [
+            'primary' => 'primary',
+            'secondary' => 'secondary',
+            'success' => 'success',
+            'danger' => 'danger',
+            'warning' => 'warning',
+            'info' => 'info',
+            'light' => 'light',
+            'dark' => 'dark'
+        ];
+    }
 }

@@ -31,6 +31,11 @@
             <form role="form">
               <div class="box-body">
                 <div class="form-group">
+                  <label for="push">置顶</label>
+                  <input name="topped_at" type="checkbox">
+                </div>
+
+                <div class="form-group">
                   <label for="message">简短通知</label>
                   <input type="text" name="message" class="form-control" id="message" value="{{ old('message') }}" id="message" placeholder="简短通知">
                 </div>
@@ -41,8 +46,14 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="push">置顶</label>
-                  <input name="topped_at" type="checkbox">
+                  <label for="message">简短通知</label>
+                  <div>
+                    @foreach($alert as $key => $value)
+                    <div class="alert alert-{{$value}} col-md-1" role="alert">
+                    {{$value}}
+                    </div>
+                    @endforeach
+                  </div>
                 </div>
               </div>
               <!-- /.box-body -->

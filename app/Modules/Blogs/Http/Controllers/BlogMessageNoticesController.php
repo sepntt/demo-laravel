@@ -30,7 +30,10 @@ class BlogMessageNoticesController extends \App\Modules\Backend\Http\Controllers
      */
     public function create()
     {
-        return $this->render();
+        $Posts = app()->make(PostsInterface::class);
+        $Posts->model(\App\Models\BlogMessagesNotice::class);
+        $alert = $Posts->noticesAlert();
+        return $this->render(['alert' => $alert]);
     }
 
     /**
